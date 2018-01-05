@@ -7,4 +7,6 @@ struct
   fun bind (Identity a) k = k a
 
   fun op >>= (m, k) = bind m k
+
+  fun runIdentity (Identity m) = m
 end

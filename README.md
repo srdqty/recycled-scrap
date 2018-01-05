@@ -1,7 +1,14 @@
 # Recycled Scrap
 
+Check out test/test.sml to see how it all threads together.
+
 ```
-nix-shell --pure shell.nix --run make typecheck
+It type checks
+
+nix-shell --pure shell.nix --run 'make typecheck'
+
+Run the test
+nix-shell --pure shell.nix --run 'make test'
 ```
 
 Scrap your type classes and recycle them as modules? ¯\\_(ツ)_/¯

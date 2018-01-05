@@ -125,10 +125,13 @@ structure Test2 = MkTest(
 val example1 = Test1.test
 val example2 = Test2.test
 
-val (run1 : (unit * char)) = IdentityMonad.runIdentity
+val ((_, run1) : (unit * char)) = IdentityMonad.runIdentity
   (StateT.runStateT
     (ReaderTStateT.runReaderT example1 #"A") #"B")
 
-val (run2 : (unit * char)) = IdentityMonad.runIdentity
+val ((_, run2) : (unit * char)) = IdentityMonad.runIdentity
   (ReaderT.runReaderT
     (StateTReaderT.runStateT example2 #"B") #"A")
+
+val _ = (print (Char.toString run1); print "\n")
+val _ = (print (Char.toString run2); print "\n")

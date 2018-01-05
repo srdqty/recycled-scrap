@@ -20,6 +20,7 @@ struct
       structure StateTMonad = Monad
     )
   in
+    open Concrete
     open Monad
     open MonadTrans
     open MonadState
