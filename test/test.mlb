@@ -1,0 +1,9 @@
+$(SML_LIB)/basis/basis.mlb
+../src/monad/monad.mlb
+../src/monad-trans/monad-trans.mlb
+../src/monad-state/monad-state.mlb
+../src/monad-reader/monad-reader.mlb
+../src/identity-monad/identity-monad.mlb
+../src/reader-t/reader-t.mlb
+../src/state-t/state-t.mlb
+test.sml

@@ -1,0 +1,22 @@
+local
+  $(SML_LIB)/basis/basis.mlb (* For unit type *)
+  ../monad/monad.mlb
+  ../monad-trans/monad-trans.mlb
+  ../monad-reader/monad-reader.mlb
+  ../monad-state/monad-state.mlb
+  reader-t-concrete.sig
+  reader-t-concrete.fun
+  reader-t-monad.fun
+  reader-t-monad-trans.fun
+  reader-t-monad-reader.fun
+  reader-t-monad-state.fun
+  reader-t.fun
+in
+  signature READER_T_CONCRETE
+  functor MkReaderTConcrete
+  functor MkReaderTMonad
+  functor MkReaderTMonadTrans
+  functor MkReaderTMonadReader
+  functor MkReaderTMonadState
+  functor MkReaderT
+end

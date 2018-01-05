@@ -7,6 +7,7 @@ typecheck:
 	make -C monad-reader typecheck
 	make -C monad-state typecheck
 	make -C monad-trans typecheck
+	make -C reader-t typecheck
 	make -C state-t typecheck
 
 .PHONY: clean

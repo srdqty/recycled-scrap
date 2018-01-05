@@ -5,4 +5,6 @@ struct
   val return = Identity
 
   fun bind (Identity a) k = k a
+
+  fun op >>= (m, k) = bind m k
 end

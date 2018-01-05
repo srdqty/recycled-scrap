@@ -2,12 +2,14 @@ local
   $(SML_LIB)/basis/basis.mlb (* For unit type *)
   ../monad/monad.mlb
   ../monad-trans/monad-trans.mlb
+  ../monad-reader/monad-reader.mlb
   ../monad-state/monad-state.mlb
   state-t-concrete.sig
   state-t-concrete.fun
   state-t-monad.fun
   state-t-monad-trans.fun
   state-t-monad-state.fun
+  state-t-monad-reader.fun
   state-t.fun
 in
   signature STATE_T_CONCRETE
@@ -15,5 +17,6 @@ in
   functor MkStateTMonad
   functor MkStateTMonadTrans
   functor MkStateTMonadState
+  functor MkStateTMonadReader
   functor MkStateT
 end
