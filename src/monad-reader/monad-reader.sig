@@ -1,11 +1,12 @@
 signature MONAD_READER =
 sig
-  structure Monad : MONAD
+  structure MonadConstraint : MONAD
 
   type 'a m
-  type r
 
-  sharing type Monad.m = m
+  sharing type m = MonadConstraint.m
+
+  type r
 
   val ask : r m
   val local' : (r -> r) -> 'a m -> 'a m
