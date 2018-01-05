@@ -1,0 +1,5 @@
+local
+  identity-monad.fun
+in
+  structure IdentityMonad
+end

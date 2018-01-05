@@ -1,0 +1,6 @@
+local
+  ../monad/monad.mlb
+  monad-reader.sig
+in
+  signature MONAD_READER
+end

@@ -1,0 +1,7 @@
+local
+  $(SML_LIB)/basis/basis.mlb (* For unit type *)
+  ../monad/monad.mlb
+  monad-state.sig
+in
+  signature MONAD_STATE
+end

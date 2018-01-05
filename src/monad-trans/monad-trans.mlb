@@ -1,0 +1,6 @@
+local
+  ../monad/monad.mlb
+  monad-trans.sig
+in
+  signature MONAD_TRANS
+end

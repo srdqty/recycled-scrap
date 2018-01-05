@@ -1,0 +1,5 @@
+local
+  monad.sig
+in
+  signature MONAD
+end
