@@ -7,31 +7,18 @@ functor MkReaderTStateT
 ) =
 struct
   local
-    structure Concrete = MkReaderTConcrete(
+    structure MonadReader = MkReaderT(
       structure Wrapped = WrappedMonad
       type r = r
     )
-    structure Monad = MkReaderTMonad(
-      structure ReaderTConcrete = Concrete
-    )
-    structure MonadTrans = MkReaderTMonadTrans(
-      structure ReaderTConcrete = Concrete
-    )
-    structure MonadReader = MkReaderTMonadReader(
-      structure ReaderTConcrete = Concrete
-      structure ReaderTMonad = Monad
-    )
     structure MonadState = MkReaderTMonadState
     (
-      structure Concrete = Concrete
-      structure Monad = Monad
-      structure MonadTrans = MonadTrans
+      structure Concrete = MonadReader
+      structure Monad = MonadReader
+      structure MonadTrans = MonadReader
       structure MonadState = WrappedMonadState
     )
   in
-    open Concrete
-    open Monad
-    open MonadTrans
     open MonadReader
     open MonadState
   end
@@ -46,31 +33,18 @@ functor MkStateTReaderT
 ) =
 struct
   local
-    structure Concrete = MkStateTConcrete(
+    structure MonadState = MkStateT(
       structure Wrapped = WrappedMonad
       type s = s
     )
-    structure Monad = MkStateTMonad(
-      structure StateTConcrete = Concrete
-    )
-    structure MonadTrans = MkStateTMonadTrans(
-      structure StateTConcrete = Concrete
-    )
-    structure MonadState = MkStateTMonadState(
-      structure StateTConcrete = Concrete
-      structure StateTMonad = Monad
-    )
     structure MonadReader = MkStateTMonadReader
     (
-      structure Concrete = Concrete
-      structure Monad = Monad
-      structure MonadTrans = MonadTrans
+      structure Concrete = MonadState
+      structure Monad = MonadState
+      structure MonadTrans = MonadState
       structure MonadReader = WrappedMonadReader
     )
   in
-    open Concrete
-    open Monad
-    open MonadTrans
     open MonadState
     open MonadReader
   end
@@ -85,7 +59,6 @@ structure ReaderT = MkReaderT(
   structure Wrapped = IdentityMonad
   type r = char
 )
-
 
 structure ReaderTStateT = MkReaderTStateT(
   structure WrappedMonad = StateT

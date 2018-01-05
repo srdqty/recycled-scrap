@@ -6,12 +6,13 @@ Check out [test/test.sml](test/test.sml) to see how it all threads together
 (it's not pretty lol).
 
 ```
-It type checks
+Run the test.
 
-nix-shell --pure shell.nix --run 'make typecheck'
+make
 
-Run the test
-nix-shell --pure shell.nix --run 'make test'
+Only perform type checking.
+
+make nix-typecheck
 ```
 
 Scrap your type classes and recycle them as modules? ¯\\_(ツ)_/¯

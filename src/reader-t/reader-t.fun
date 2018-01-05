@@ -20,9 +20,9 @@ struct
       structure ReaderTMonad = Monad
     )
   in
-    open Concrete
     open Monad
     open MonadTrans
     open MonadReader
+    open Concrete
   end
 end
