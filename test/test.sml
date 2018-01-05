@@ -1,16 +1,3 @@
-functor MkTest(
-  structure MonadState : MONAD_STATE
-  structure MonadReader : MONAD_READER
-  sharing type MonadState.m = MonadReader.m
-  sharing type MonadState.MonadConstraint.m = MonadReader.MonadConstraint.m
-  sharing type MonadReader.r = MonadState.s
-) =
-struct
-  structure Monad = MonadState.MonadConstraint
-
-  fun test is ir = Monad.bind MonadReader.ask MonadState.put
-end
-
 functor MkReaderTStateT
 (
   structure WrappedMonad : MONAD
@@ -42,6 +29,7 @@ struct
       structure MonadState = WrappedMonadState
     )
   in
+    open Concrete
     open Monad
     open MonadTrans
     open MonadReader
@@ -80,6 +68,7 @@ struct
       structure MonadReader = WrappedMonadReader
     )
   in
+    open Concrete
     open Monad
     open MonadTrans
     open MonadState
@@ -92,21 +81,54 @@ structure StateT = MkStateT(
   type s = char
 )
 
-structure Example1 = MkReaderTStateT(
-  structure WrappedMonad = StateT
-  structure WrappedMonadState = StateT
-  type r = char
-)
-
 structure ReaderT = MkReaderT(
   structure Wrapped = IdentityMonad
   type r = char
 )
 
-structure Example2 = MkStateTReaderT(
+
+structure ReaderTStateT = MkReaderTStateT(
+  structure WrappedMonad = StateT
+  structure WrappedMonadState = StateT
+  type r = char
+)
+
+structure StateTReaderT = MkStateTReaderT(
   structure WrappedMonad = ReaderT
   structure WrappedMonadReader = ReaderT
   type s = char
 )
 
-val _ = print "lmao"
+functor MkTest(
+  structure MonadState : MONAD_STATE
+  structure MonadReader : MONAD_READER
+  sharing type MonadState.m = MonadReader.m
+  sharing type MonadState.MonadConstraint.m = MonadReader.MonadConstraint.m
+  sharing type MonadReader.r = MonadState.s
+) =
+struct
+  structure Monad = MonadState.MonadConstraint
+
+  val (test : unit Monad.m) = Monad.bind MonadReader.ask MonadState.put
+end
+
+structure Test1 = MkTest(
+  structure MonadState = ReaderTStateT
+  structure MonadReader = ReaderTStateT
+)
+
+structure Test2 = MkTest(
+  structure MonadState = StateTReaderT
+  structure MonadReader = StateTReaderT
+)
+
+val example1 = Test1.test
+val example2 = Test2.test
+
+val (run1 : (unit * char)) = IdentityMonad.runIdentity
+  (StateT.runStateT
+    (ReaderTStateT.runReaderT example1 #"A") #"B")
+
+val (run2 : (unit * char)) = IdentityMonad.runIdentity
+  (ReaderT.runReaderT
+    (StateTReaderT.runStateT example2 #"B") #"A")
