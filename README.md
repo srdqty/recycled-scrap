@@ -1,5 +1,7 @@
 # Recycled Scrap
 
+He claimed nobody would... lol https://youtu.be/hIZxTQP1ifo?t=6123
+
 Check out test/test.sml to see how it all threads together.
 
 ```
